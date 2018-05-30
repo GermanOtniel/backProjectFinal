@@ -8,6 +8,8 @@ const Comentario = require('../models/Comment');
 router.get('/:_id', (req,res,next)=>{
   
   Product.findById(req.params)
+  .populate('owner')
+  .populate('lider')
     .then(product=>{
       res.json(product)
     })
