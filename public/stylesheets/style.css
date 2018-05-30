@@ -1,19 +1,12 @@
-
-@import url('https://fonts.googleapis.com/css?family=Just+Another+Hand');
-
-
+@import url("https://fonts.googleapis.com/css?family=Just+Another+Hand");
 body {
   padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
-  background-image: url('../images/');
-  background-size: 100%;
-}
+  background-image: url("../images/");
+  background-size: 100%; }
 
 a {
-  color: #00B7FF;
-}
-
-
+  color: #00B7FF; }
 
 p {
   font-family: "Just Another Hand", cursive;
@@ -21,5 +14,6 @@ p {
   font-weight: bolder;
   margin-top: -3%;
   margin-left: -3%;
-  color: black;
-}
+  color: black; }
+
+/*# sourceMappingURL=style.css.map */

@@ -8,11 +8,15 @@ const hbs          = require('hbs');
 const mongoose     = require('mongoose');
 const logger       = require('morgan');
 const path         = require('path');
+//PASSPORT 
+const passport     = require("./helpers/passport");
+const session      = require("express-session"); 
+const cors         = require("cors");
 
 
 mongoose.Promise = Promise;
 mongoose
-  .connect('mongodb://localhost/back', {useMongoClient: true})
+  .connect(process.env.DATABASE)
   .then(() => {
     console.log('Connected to Mongo!')
   }).catch(err => {
@@ -23,6 +27,28 @@ const app_name = require('./package.json').name;
 const debug = require('debug')(`${app_name}:${path.basename(__filename).split('.')[0]}`);
 
 const app = express();
+
+
+//CORS
+const options = {
+  credentials: true,
+  origin: true
+}
+app.use(cors(options));
+
+
+//session
+app.use(session({
+  secret: "otni",
+  resave:false,
+  saveUninitialized:true
+}));
+//initialize passport
+
+app.use(passport.initialize());
+app.use(passport.session());
+
+
 
 // Middleware Setup
 app.use(logger('dev'));
@@ -52,7 +78,13 @@ app.locals.title = 'Express - Generated with IronGenerator';
 
 
 const index = require('./routes/index');
+const auth  = require('./routes/auth');
+const products = require('./routes/products');
+const auction = require('./routes/auction');
+app.use('/auction',auction)
+app.use('/products',products)
 app.use('/', index);
+app.use('/auth', auth);
 
 
 module.exports = app;
